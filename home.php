@@ -13,7 +13,8 @@
         load();
     }
 
-    echo "<h3>Welcome back, " . "{$_SESSION['firstname']}!</h3>";
+    echo "
+        <div class='container'><h2>Welcome back, " . "{$_SESSION['firstname']}!</h2></div>";
 ?>
 
 </body>
