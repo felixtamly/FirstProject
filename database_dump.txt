@@ -1,0 +1,43 @@
+CREATE TABLE Members (
+	member_id INT(6) UNSIGNED AUTO-INCREMENT NOT NULL,
+	firstname VARCHAR(30) NOT NULL,
+	lastname VARCHAR(30) NOT NULL,
+	email VARCHAR(100) NOT NULL,
+	pw VARCHAR(30) NOT NULL,
+	reg_date DATETIME NOT NULL,
+	PRIMARY KEY (member_id),
+	UNIQUE (email)
+);
+
+CREATE TABLE Orders (
+	order_id INT(6) UNSIGNED AUTO-INCREMENT NOT NULL,
+	member_id INT(6) UNSIGNED NOT NULL,
+	total DECIMAL(8,2) NOT NULL,
+	order_date DATETIME NOT NULL,
+	PRIMARY KEY (order_id),
+	FOREIGN KEY (member_id) REFERENCES Members(member_id)
+);
+
+CREATE TABLE Order_contents (
+	content_id INT(6) UNSIGNED AUTO-INCREMENT NOT NULL,
+	order_id INT(6) UNSIGNED NOT NULL,
+	item_id INT(6) UNSIGNED NOT NULL,
+	quantity INT(6) UNSIGNED NOT NULL DEFAULT 1,
+	price DECIMAL(4,2) NOT NULL,
+	PRIMARY KEY (content_id),
+	FOREIGN KEY (order_id) REFERENCES Orders(order_id),
+	FOREIGN KEY (item_id) REFERENCES Items(item_id)
+);
+
+CREATE TABLE Items (
+	item_id INT(6) UNSIGNED AUTO-INCREMENT NOT NULL,
+	item_name VARCHAR(30) NOT NULL,
+	item_desc VARCHAR(200) NOT NULL,
+	item_price DECIMAL(4,2) NOT NULL,
+	PRIMARY KEY (item_id)
+);
+
+INSERT INTO Items (item_name, item_desc, item_price) VALUES ('Russell Hobbs Iron', 'Russell Hobbs Colour Control Ultra Steaming Iron 21023', 29.99);
+INSERT INTO Items (item_name, item_desc, item_price) VALUES ('Morphy Richards Steamer', 'Morphy Richards 470001 3 Tier Steamer - Stainless Steel', 24.99);
+INSERT INTO Items (item_name, item_desc, item_price) VALUES ('Opti Folding Exercise Bike', 'Opti Folding Exercise Bike', 84.99);
+INSERT INTO Items (item_name, item_desc, item_price) VALUES ('HP Stream 11.6 Inch Cloudbook', 'HP Stream 11.6 Inch Celeron 2GB 32GB Cloudbook - Purple', 219.00);
