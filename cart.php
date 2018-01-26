@@ -70,7 +70,7 @@ if(!empty($_SESSION['cart'])) {
                     echo '<tr><td></td><td></td><td></td><td><strong>Total = </strong></td><td><strong> '. number_format($total, 2) . '</strong></td></tr>';
                     $mysqli->close();
                 } else {
-                    echo '<p>Your cart is currently empty.</p>';
+                    echo '<h4>Your cart is currently empty.</h4>';
                 }
 
             ?>

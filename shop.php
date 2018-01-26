@@ -57,7 +57,7 @@ $result = $mysqli->query("SELECT * FROM Items");
         for (var i = 0; i < tr.length; i++) {
             var td = tr[i].getElementsByTagName("td")[0];
             if (td) {
-                if (td.innerHTML.toUpperCase().indexOf(input) > -1) {
+                if (td.innerHTML.toUpperCase().indexOf(input) > -1) { //indeoxOf() return -1 if the value to search for never occurs
                     tr[i].style.display = "";
                 } else {
                     tr[i].style.display = "none";
