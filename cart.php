@@ -38,8 +38,6 @@ if(!empty($_SESSION['cart'])) {
     }
     $query = substr($query, 0, -1) . ') ORDER BY item_id';
     $result = $mysqli->query($query);
-} else {
-    echo '<p>Your cart is currently empty.</p>';
 }
 
 ?>
@@ -58,25 +56,35 @@ if(!empty($_SESSION['cart'])) {
             </thead>
             <tbody>
             <?php
-                while($row = $result->fetch_array(MYSQLI_ASSOC)) {
-                    $subtotal = $_SESSION['cart'][$row['item_id']]['quantity'] * $_SESSION['cart'][$row['item_id']]['price'];
-                    $total += $subtotal;
+                if(!empty($_SESSION['cart'])) {
+                    while($row = $result->fetch_array(MYSQLI_ASSOC)) {
+                        $subtotal = $_SESSION['cart'][$row['item_id']]['quantity'] * $_SESSION['cart'][$row['item_id']]['price'];
+                        $total += $subtotal;
 
-                    echo "<tr><td>{$row['item_name']}</td>";
-                    echo "<td>{$row['item_desc']}</td>";
-                    echo "<td><input type=\"text\" size=\"3\" name=\"qty[{$row['item_id']}]\" value =\"{$_SESSION['cart'][$row['item_id']]['quantity']}\"></td>";
-                    echo "<td>{$row['item_price']}</td>";
-                    echo "<td>" . number_format($subtotal, 2) . "</td></tr>";
+                        echo "<tr><td>{$row['item_name']}</td>";
+                        echo "<td>{$row['item_desc']}</td>";
+                        echo "<td><input type=\"text\" size=\"3\" name=\"qty[{$row['item_id']}]\" value =\"{$_SESSION['cart'][$row['item_id']]['quantity']}\"></td>";
+                        echo "<td>{$row['item_price']}</td>";
+                        echo "<td>" . number_format($subtotal, 2) . "</td></tr>";
+                    }
+                    echo '<tr><td></td><td></td><td></td><td><strong>Total = </strong></td><td><strong> '. number_format($total, 2) . '</strong></td></tr>';
+                    $mysqli->close();
+                } else {
+                    echo '<p>Your cart is currently empty.</p>';
                 }
 
-                echo '<tr><td></td><td></td><td></td><td><strong>Total = </strong></td><td><strong> '. number_format($total, 2) . '</strong></td></tr>';
-
-                $mysqli->close();
             ?>
             </tbody>
         </table>
-        <button type="submit" class="btn btn-info">Update</button>
+        <?php
+        if(!empty($_SESSION['cart']))
+            echo '<button type="submit" class="btn btn-info">Update</button>';
+        ?>
     </form>
+    <?php
+    if(!empty($_SESSION['cart']))
+        echo '<button type="button" class="btn btn-success"><a href="checkout.php?total=' . $total . '">Checkout</a></button>';
+    ?>
 </div>
 
 </body>

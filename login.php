@@ -10,12 +10,12 @@
 
 <body>
 <?php
+    session_start();
     include('header_logout.php');
-//
-//    if(isset($_SESSION['member_id'])) {
-//        session_destroy();
-//    }
 
+    if(isset($_SESSION['member_id'])) {
+        session_unset();
+    }
     if(isset($errors) && !empty($errors)) {
         foreach($errors as $msg) {
             echo "$msg<br>";
