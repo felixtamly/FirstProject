@@ -16,7 +16,6 @@
             <ul class="nav navbar-nav">
                 <li><a href="home.php">Home</a></li>
                 <li><a href="shop.php">Shop</a></li>
-                <li><a href="login.php">Log Out</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="#">
@@ -24,6 +23,8 @@
                     echo "{$_SESSION['firstname']} " . "{$_SESSION['lastname']}";
                 ?>
                     </a></li>
+                <li><a href="cart.php">My Cart</a></li>
+                <li><a href="login.php">Log Out</a></li>
             </ul>
         </div>
 
